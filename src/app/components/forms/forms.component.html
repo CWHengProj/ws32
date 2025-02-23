@@ -1,0 +1,58 @@
+<h1>ToDo</h1>
+<form [formGroup]="userForm" (submit)="addItemToList()">
+    <table>
+        <tbody>
+            <tr>
+                <td>
+                    <label>Description: </label>
+                    <input type="text" formControlName="description">
+                </td>
+                <td>
+                    <label>Priority:</label>
+                    <div>
+                        <p>
+
+                            <label for="high" >High</label>
+                            <input type="radio" formControlName="priority" name="priority" id="high" value="high">
+
+                            <label for="medium">Medium</label>
+                            <input type="radio" formControlName="priority" name="priority" id="medium" value="medium">
+
+                            <label for="low" >Low</label>
+                            <input type="radio" formControlName="priority" name="priority" id="low" value="low">
+                        </p>
+
+                    </div>
+                </td>
+                <td>
+                    <label>Due:</label>
+                    <input type="date" formControlName="due">
+
+                </td>
+                <td>
+                    <button type="submit" [disabled]="isValid()">Add</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</form>
+@if(userArray.length>0){
+    <table>
+        <thead>
+            <h1>Task</h1>
+        </thead>
+        <tbody>
+            @for (item of userArray; track $index){
+
+                <tr>
+                    <td>{{userForm.value.description}}</td>
+                    <td>{{userForm.value.priority}}</td>
+                    <td>{{userForm.value.due}}</td>
+
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+<p>debugger: {{userForm.value|json}}</p>
