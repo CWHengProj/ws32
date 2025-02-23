@@ -10,27 +10,25 @@
                 <td>
                     <label>Priority:</label>
                     <div>
-                        <p>
+                        <label for="high" >High</label>
+                        <input type="radio" formControlName="priority" name="priority" id="high" value="high">
 
-                            <label for="high" >High</label>
-                            <input type="radio" formControlName="priority" name="priority" id="high" value="high">
+                        <label for="medium">Medium</label>
+                        <input type="radio" formControlName="priority" name="priority" id="medium" value="medium">
 
-                            <label for="medium">Medium</label>
-                            <input type="radio" formControlName="priority" name="priority" id="medium" value="medium">
-
-                            <label for="low" >Low</label>
-                            <input type="radio" formControlName="priority" name="priority" id="low" value="low">
-                        </p>
-
+                        <label for="low" >Low</label>
+                        <input type="radio" formControlName="priority" name="priority" id="low" value="low">
                     </div>
                 </td>
                 <td>
                     <label>Due:</label>
                     <input type="date" formControlName="due">
-
+                    @if(dateIsInPast()){
+                        <p>Date must be in the future!</p>
+                    }
                 </td>
                 <td>
-                    <button type="submit" [disabled]="isValid()">Add</button>
+                    <button type="submit" [disabled]="(!isValid() || dateIsInPast())">Add</button>
                 </td>
             </tr>
         </tbody>
@@ -55,4 +53,4 @@
     </table>
 }
 
-<p>debugger: {{userForm.value|json}}</p>
+<!-- <p>debugger: {{userForm.value|json}}</p> -->
